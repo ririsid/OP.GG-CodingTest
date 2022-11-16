@@ -44,6 +44,7 @@
 		7118A9C82924C0D0004D92DD /* CodingTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodingTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7118A9CC2924C0D0004D92DD /* CodingTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingTestUITests.swift; sourceTree = "<group>"; };
 		7118A9CE2924C0D0004D92DD /* CodingTestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingTestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7118A9DC2924C6FF004D92DD /* CodingTest.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CodingTest.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				7118A9B02924C0CF004D92DD /* CodingTest */,
+				7118A9DB2924C6C6004D92DD /* Configurations */,
 				7118A9C12924C0D0004D92DD /* CodingTestTests */,
 				7118A9CB2924C0D0004D92DD /* CodingTestUITests */,
 				7118A9AF2924C0CF004D92DD /* Products */,
@@ -125,6 +127,14 @@
 				7118A9CE2924C0D0004D92DD /* CodingTestUITestsLaunchTests.swift */,
 			);
 			path = CodingTestUITests;
+			sourceTree = "<group>";
+		};
+		7118A9DB2924C6C6004D92DD /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				7118A9DC2924C6FF004D92DD /* CodingTest.xcconfig */,
+			);
+			path = Configurations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,6 +307,7 @@
 /* Begin XCBuildConfiguration section */
 		7118A9D02924C0D0004D92DD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7118A9DC2924C6FF004D92DD /* CodingTest.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -357,6 +368,7 @@
 		};
 		7118A9D12924C0D0004D92DD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7118A9DC2924C6FF004D92DD /* CodingTest.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
