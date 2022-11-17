@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  CodingTest
+
+  Created by 박정연 on 2022/11/17.
+  
+*/
+
+"OK" = "OK";
+"Confirm" = "Confirm";
+"Cancel" = "Cancel";
+"Yes" = "Yes";
+"No" = "No";
