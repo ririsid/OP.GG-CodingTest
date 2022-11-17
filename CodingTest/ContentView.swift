@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var apiError: APIError? = nil
     @State private var showAlert = false
     @State private var summoner: Summoner? = nil
+    @State private var matches: SummonerMatches? = nil
 
     var body: some View {
         VStack {
@@ -33,6 +34,7 @@ struct ContentView: View {
         .task {
             do {
                 summoner = try await summonerService.fetchSummoner("genetory")
+                matches = try await summonerService.fetchSummonerMatches("genetory")
             } catch {
                 if let error = error as? APIError {
                     showAlert = true

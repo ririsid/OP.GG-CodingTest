@@ -38,4 +38,25 @@ final class SummonerService {
                 .store(in: &cancellables)
         }
     }
+
+    /// 게임 정보 가져오기
+    func fetchSummonerMatches(_ name: String, lastMatch: UInt? = nil, callbackQueue: DispatchQueue? = .none) -> AnyPublisher<SummonerMatches, APIError> {
+        return apiProvider.request(.summonerMatches(name: name, lastMatch: lastMatch))
+            .compactMap { try? JSONDecoder().decode(SummonerMatches.self, from: $0.data) }
+            .eraseToAnyPublisher()
+    }
+
+    /// 게임 정보 가져오기
+    func fetchSummonerMatches(_ name: String, lastMatch: UInt? = nil) async throws -> SummonerMatches {
+        return try await withCheckedThrowingContinuation { continuation in
+            fetchSummonerMatches(name, lastMatch: lastMatch)
+                .sink { completion in
+                    guard case let .failure(error) = completion else { return }
+                    continuation.resume(throwing: error)
+                } receiveValue: { data in
+                    continuation.resume(returning: data)
+                }
+                .store(in: &cancellables)
+        }
+    }
 }
