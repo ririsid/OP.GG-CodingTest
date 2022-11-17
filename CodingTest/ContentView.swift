@@ -31,20 +31,22 @@ struct ContentView: View {
                 Text(recoverySuggestion)
             }
         }
-        .task {
-            do {
-                summoner = try await summonerService.fetchSummoner("genetory")
-                matches = try await summonerService.fetchSummonerMatches("genetory")
-            } catch {
-                if let error = error as? APIError {
-                    showAlert = true
-                    apiError = error
-                    if let requestURL = error.response?.request?.url {
-                        Logger.network.notice("\(error.localizedDescription) (\(requestURL))")
-                    }
-                } else {
-                    Logger.network.notice("\(error.localizedDescription)")
+        .task(task)
+    }
+
+    @Sendable private func task() async {
+        do {
+            summoner = try await summonerService.fetchSummoner("genetory")
+            matches = try await summonerService.fetchSummonerMatches("genetory")
+        } catch {
+            if let error = error as? APIError {
+                showAlert = true
+                apiError = error
+                if let requestURL = error.response?.request?.url {
+                    Logger.network.notice("\(error.localizedDescription) (\(requestURL))")
                 }
+            } else {
+                Logger.network.notice("\(error.localizedDescription)")
             }
         }
     }
