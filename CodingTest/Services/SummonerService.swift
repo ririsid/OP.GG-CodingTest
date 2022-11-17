@@ -1,0 +1,41 @@
+//
+//  SummonerService.swift
+//  CodingTest
+//
+//  Created by 박정연 on 2022/11/16.
+//
+
+import Combine
+import Foundation
+
+final class SummonerService {
+
+    private let apiProvider: APIProvider<SummonerAPI>
+
+    private var cancellables: Set<AnyCancellable> = .init()
+
+    init() {
+        self.apiProvider = APIProvider<SummonerAPI>()
+    }
+
+    /// 소환사 정보 가져오기
+    func fetchSummoner(_ name: String, callbackQueue: DispatchQueue? = .none) -> AnyPublisher<Summoner, APIError> {
+        return apiProvider.request(.summoner(name: name))
+            .compactMap { try? JSONDecoder().decode(SummonerData.self, from: $0.data).summoner }
+            .eraseToAnyPublisher()
+    }
+
+    /// 소환사 정보 가져오기
+    func fetchSummoner(_ name: String) async throws -> Summoner {
+        return try await withCheckedThrowingContinuation { continuation in
+            fetchSummoner(name)
+                .sink { completion in
+                    guard case let .failure(error) = completion else { return }
+                    continuation.resume(throwing: error)
+                } receiveValue: { data in
+                    continuation.resume(returning: data)
+                }
+                .store(in: &cancellables)
+        }
+    }
+}

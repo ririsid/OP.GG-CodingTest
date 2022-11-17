@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    let summonerService: SummonerService = .init()
+
+    @State private var apiError: APIError? = nil
+    @State private var showAlert = false
+    @State private var summoner: Summoner? = nil
+
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -16,6 +23,28 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+        .alert(isPresented: $showAlert, error: apiError) { _ in
+            Button("OK") {}
+        } message: { error in
+            if let recoverySuggestion = error.recoverySuggestion {
+                Text(recoverySuggestion)
+            }
+        }
+        .task {
+            do {
+                summoner = try await summonerService.fetchSummoner("genetory")
+            } catch {
+                if let error = error as? APIError {
+                    showAlert = true
+                    apiError = error
+                    if let requestURL = error.response?.request?.url {
+                        Logger.network.notice("\(error.localizedDescription) (\(requestURL))")
+                    }
+                } else {
+                    Logger.network.notice("\(error.localizedDescription)")
+                }
+            }
+        }
     }
 }
 
