@@ -31,7 +31,6 @@ struct ChampionElement: Codable, Identifiable {
 // MARK: - Game
 struct Game: Codable, Identifiable {
     var id: String { gameID }
-
     let mmr: Int?
     let champion: GameChampion
     let spells, items: [Item]

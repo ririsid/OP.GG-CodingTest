@@ -16,14 +16,14 @@ struct ContentView: View {
     @State private var summoner: Summoner? = nil
     @State private var matches: SummonerMatches? = nil
 
+    // MARK: Views
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            if let summoner = summoner {
+                HeaderView(summoner: SummonerModel(summoner))
+            }
         }
-        .padding()
         .alert(isPresented: $showAlert, error: apiError) { _ in
             Button("OK") {}
         } message: { error in
@@ -33,6 +33,8 @@ struct ContentView: View {
         }
         .task(task)
     }
+
+    // MARK: Methods
 
     @Sendable private func task() async {
         do {
