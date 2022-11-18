@@ -19,11 +19,14 @@ struct ContentView: View {
     // MARK: Views
 
     var body: some View {
-        VStack {
-            if let summoner = summoner {
-                HeaderView(summoner: SummonerModel(summoner))
+        ScrollView {
+            LazyVStack {
+                if let summoner = summoner {
+                    HeaderView(summoner: SummonerModel(summoner))
+                }
             }
         }
+        .background(Color.paleGrey)
         .alert(isPresented: $showAlert, error: apiError) { _ in
             Button("OK") {}
         } message: { error in
@@ -31,12 +34,13 @@ struct ContentView: View {
                 Text(recoverySuggestion)
             }
         }
-        .task(task)
+        .task(fetchData)
+        .refreshable(action: fetchData)
     }
 
     // MARK: Methods
 
-    @Sendable private func task() async {
+    @Sendable private func fetchData() async {
         do {
             summoner = try await summonerService.fetchSummoner("genetory")
             matches = try await summonerService.fetchSummonerMatches("genetory")
