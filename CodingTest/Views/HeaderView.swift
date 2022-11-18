@@ -37,7 +37,7 @@ struct HeaderView: View {
                     .foregroundColor(.white)
                     .padding(.horizontal, 12)
                     .frame(height: 24)
-                    .background(Color.darkGrey90)
+                    .background(.darkGrey90)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             VStack(alignment: .leading) {
@@ -47,12 +47,12 @@ struct HeaderView: View {
                     .foregroundColor(.darkGrey)
                 Spacer()
                 Button(action: {}) {
-                    Text("Refresh Records")
+                    Text("Update")
                         .font(.system(size: 14))
                         .foregroundColor(.white)
                         .padding(.horizontal, 20)
                         .frame(height: 40)
-                        .background(Color.softBlue)
+                        .background(.softBlue)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
             }
@@ -67,52 +67,51 @@ struct HeaderView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     ForEach(summoner.leagues) { league in
-                        Button(action: {}) {
-                            HStack(spacing: 8) {
-                                AsyncImage(url: league.tierImageURL) {
-                                    $0.resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                                .frame(width: 64, height: 64)
-                                VStack(alignment: .leading, spacing: 0) {
-                                    Text(league.tierName)
-                                        .font(.textStyle)
-                                        .foregroundColor(.softBlue)
-                                    Text(league.tier)
-                                        .font(.textStyle3)
-                                        .foregroundColor(.darkGrey)
-                                    Spacer(minLength: 1)
-                                    Text(makeLPString(league.lp))
-                                        .font(.system(size: 12))
-                                        .foregroundColor(.darkGrey)
-                                    Spacer(minLength: 1)
-                                    Text(makeWinLoseString(wins: league.wins, losses: league.losses, winningPercentage: league.winningPercentageString))
-                                        .font(.textStyle4)
-                                        .foregroundColor(.steelGrey)
-                                }
-                                .frame(height: 64)
-                                Spacer(minLength: 0)
-                                Image("iconArrowRight")
-                                    .background(Circle()
-                                        .fill(.paleGrey)
-                                        .frame(width: 40, height: 40))
+                        HStack(spacing: 8) {
+                            AsyncImage(url: league.tierImageURL) {
+                                $0.resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .frame(width: 64, height: 64)
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text(league.tierName)
+                                    .font(.textStyle)
+                                    .foregroundColor(.softBlue)
+                                Text(league.tier)
+                                    .font(.textStyle3)
+                                    .foregroundColor(.darkGrey)
+                                Spacer(minLength: 1)
+                                Text(makeLPString(league.lp))
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.darkGrey)
+                                Spacer(minLength: 1)
+                                Text(makeWinLoseString(wins: league.wins, losses: league.losses, winningPercentage: league.winningPercentage))
+                                    .font(.textStyle4)
+                                    .foregroundColor(.steelGrey)
                             }
                             .frame(height: 64)
-                            .padding(.leading, 12)
-                            .padding(.trailing, 16)
-                            .padding(.vertical, 18)
-                            .frame(width: proxy.size.width - 48)
-                            .background(Color.white)
-                            .cornerRadius(4)
-                            .shadow(color: .steelGrey.opacity(0.2), radius: 3, y: 4)
+                            Spacer(minLength: 0)
+                            Image("iconArrowRight")
+                                .background(Circle()
+                                    .fill(.paleGrey)
+                                    .frame(width: 40, height: 40))
                         }
+                        .frame(height: 64)
+                        .padding(.leading, 12)
+                        .padding(.trailing, 16)
+                        .padding(.vertical, 18)
+                        .frame(width: max(0, (proxy.size.width - 48)))
+                        .background(.white)
+                        .cornerRadius(4)
+                        .shadow(color: .steelGrey.opacity(0.2), radius: 3, y: 4)
                     }
                 }
-                .padding(8)
             }
         }
+        .frame(height: 100)
+        .padding(8)
     }
 
     // MARK: Methods
@@ -130,8 +129,9 @@ struct HeaderView: View {
 }
 
 struct HeaderView_Previews: PreviewProvider {
+
     static var previews: some View {
         HeaderView(summoner: .init(name: "genetory", level: 44, profileImageURL: URL(string: "https://opgg-static.akamaized.net/images/profile_icons/profileIcon1625.jpg")!, leagues: [.init(wins: 345, losses: 940, tierName: "솔랭", tier: "Silver", tierImageURL: URL(string: "https://opgg-static.akamaized.net/images/medals/silver_1.png")!, lp: 535), .init(wins: 879, losses: 896, tierName: "자유 5:5 랭크", tier: "Grandmaster", tierImageURL: URL(string: "https://opgg-static.akamaized.net/images/medals/grandmaster_1.png")!, lp: 485)]))
-            .background(Color.paleGrey)
+            .background(.paleGrey)
     }
 }

@@ -9,24 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
 
+    let summonerName: String = "genetory"
+
     let summonerService: SummonerService = .init()
 
     @State private var apiError: APIError? = nil
     @State private var showAlert = false
-    @State private var summoner: Summoner? = nil
-    @State private var matches: SummonerMatches? = nil
+    @State private var summoner: SummonerModel? = nil
+    @State private var matches: MatchesModel? = nil
 
     // MARK: Views
 
     var body: some View {
         ScrollView {
-            LazyVStack {
-                if let summoner = summoner {
-                    HeaderView(summoner: SummonerModel(summoner))
+            LazyVStack(spacing: 0) {
+                if let summoner {
+                    HeaderView(summoner: summoner)
+                }
+                if let matches {
+                    MatchesView(matches: matches)
                 }
             }
         }
-        .background(Color.paleGrey)
+        .background(.paleGrey)
         .alert(isPresented: $showAlert, error: apiError) { _ in
             Button("OK") {}
         } message: { error in
@@ -42,8 +47,8 @@ struct ContentView: View {
 
     @Sendable private func fetchData() async {
         do {
-            summoner = try await summonerService.fetchSummoner("genetory")
-            matches = try await summonerService.fetchSummonerMatches("genetory")
+            self.summoner = SummonerModel(try await summonerService.fetchSummoner(summonerName))
+            self.matches = MatchesModel(try await summonerService.fetchSummonerMatches(summonerName))
         } catch {
             if let error = error as? APIError {
                 showAlert = true

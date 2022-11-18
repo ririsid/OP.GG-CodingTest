@@ -26,21 +26,6 @@ extension SummonerModel {
         let tier: String
         let tierImageURL: URL
         let lp: Int
-
-        /// 승률 (Double)
-        ///
-        /// (승리한 경기 수) ÷ {(승수)+(패수)}
-        var winningPercentage: Double {
-            Double(wins) / Double(wins + losses)
-        }
-
-        /// 승률 (String)
-        var winningPercentageString: String {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .percent
-            formatter.maximumFractionDigits = 2
-            return formatter.string(from: NSNumber(value: winningPercentage)) ?? ""
-        }
     }
 }
 
@@ -63,5 +48,10 @@ extension SummonerModel.League {
         self.tier = league.tierRank.tier
         self.tierImageURL = league.tierRank.imageURL
         self.lp = league.tierRank.lp
+    }
+
+    /// 승률
+    var winningPercentage: String {
+        Calculator.winningPercentage(wins: wins, losses: losses)
     }
 }

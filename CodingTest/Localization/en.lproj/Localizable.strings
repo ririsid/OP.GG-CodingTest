@@ -7,8 +7,7 @@
 */
 
 "OK" = "OK";
-"Confirm" = "Confirm";
-"Cancel" = "Cancel";
-"Yes" = "Yes";
-"No" = "No";
-"Refresh Records" = "Refresh Records";
+"Update" = "Update";
+"W" = "W";
+"L" = "L";
+"K/P %@" = "K/P %@";
