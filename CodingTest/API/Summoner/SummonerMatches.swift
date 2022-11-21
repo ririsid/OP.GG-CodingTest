@@ -14,10 +14,10 @@ struct SummonerMatches: Codable {
 }
 
 // MARK: - ChampionElement
-struct ChampionElement: Codable, Identifiable {
+struct ChampionElement: Codable {
     let id: Int
     let key, name: String
-    let imageURL: String
+    let imageURL: URL
     let games, kills, deaths, assists: Int
     let wins, losses: Int
 
@@ -29,21 +29,19 @@ struct ChampionElement: Codable, Identifiable {
 }
 
 // MARK: - Game
-struct Game: Codable, Identifiable {
-    var id: String { gameID }
-
+struct Game: Codable {
     let mmr: Int?
     let champion: GameChampion
     let spells, items: [Item]
     let needRenew: Bool
     let gameID: String
-    let createDate, gameLength: Int
-    let gameType: GameType
+    let createDate, gameLength: UInt
+    let gameType: String
     let summonerID: String
     let summonerName: SummonerName
     let tierRankShort: TierRankShort
     let stats: Stats
-    let peak: [String]
+    let peak: [URL]
     let isWin: Bool
 
     enum CodingKeys: String, CodingKey {
@@ -57,7 +55,7 @@ struct Game: Codable, Identifiable {
 
 // MARK: - GameChampion
 struct GameChampion: Codable {
-    let imageURL: String
+    let imageURL: URL
     let level: Int
 
     enum CodingKeys: String, CodingKey {
@@ -66,16 +64,9 @@ struct GameChampion: Codable {
     }
 }
 
-enum GameType: String, Codable {
-    case 무작위총력전 = "무작위 총력전"
-    case 솔랭 = "솔랭"
-    case 일반 = "일반"
-    case 자유55랭크 = "자유 5:5 랭크"
-}
-
 // MARK: - Item
 struct Item: Codable {
-    let imageURL: String
+    let imageURL: URL
 
     enum CodingKeys: String, CodingKey {
         case imageURL = "imageUrl"
@@ -96,18 +87,14 @@ struct General: Codable {
     let csPerMin: Double
     let contributionForKillRate: String
     let goldEarned, totalDamageDealtToChampions: Int
-    let largestMultiKillString: LargestMultiKillString
+    let largestMultiKillString: String
     let opScoreBadge: OpScoreBadge
-}
-
-enum LargestMultiKillString: String, Codable {
-    case doubleKill = "Double Kill"
-    case empty = ""
 }
 
 enum OpScoreBadge: String, Codable {
     case ace = "ACE"
-    case empty = ""
+    case mvp = "MVP"
+    case none = ""
 }
 
 // MARK: - Ward

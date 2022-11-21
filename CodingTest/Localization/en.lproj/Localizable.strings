@@ -7,7 +7,12 @@
 */
 
 "OK" = "OK";
-"Confirm" = "Confirm";
-"Cancel" = "Cancel";
-"Yes" = "Yes";
-"No" = "No";
+"Update" = "Update";
+"W" = "W";
+"L" = "L";
+"K/P %@" = "K/P %@";
+"%lldW %lldL (%@)" = "%lldW %lldL (%@)";
+"%lldW %lldL" = "%lldW %lldL";
+"Summary last %lld games" = "Summary last %lld games";
+"Most Win" = "Most Win";
+"Position" = "Position";

@@ -9,21 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
 
+    let summonerName: String = "genetory"
+
     let summonerService: SummonerService = .init()
 
     @State private var apiError: APIError? = nil
     @State private var showAlert = false
-    @State private var summoner: Summoner? = nil
-    @State private var matches: SummonerMatches? = nil
+    @State private var summoner: SummonerModel? = nil
+    @State private var matches: MatchesModel? = nil
+
+    // MARK: Views
 
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ScrollView {
+            LazyVStack(spacing: 0) {
+                if let summoner {
+                    HeaderView(summoner: summoner)
+                }
+                if let matches {
+                    MatchesView(matches: matches)
+                }
+            }
         }
-        .padding()
+        .background(.paleGrey)
         .alert(isPresented: $showAlert, error: apiError) { _ in
             Button("OK") {}
         } message: { error in
@@ -31,17 +39,20 @@ struct ContentView: View {
                 Text(recoverySuggestion)
             }
         }
-        .task(task)
+        .task(loadData)
+        .refreshable(action: loadData)
     }
 
-    @Sendable private func task() async {
+    // MARK: Methods
+
+    @Sendable private func loadData() async {
         do {
-            summoner = try await summonerService.fetchSummoner("genetory")
-            matches = try await summonerService.fetchSummonerMatches("genetory")
+            summoner = SummonerModel(try await summonerService.fetchSummoner(summonerName))
+            matches = MatchesModel(try await summonerService.fetchSummonerMatches(summonerName))
         } catch {
             if let error = error as? APIError {
-                showAlert = true
                 apiError = error
+                showAlert = true
                 if let requestURL = error.response?.request?.url {
                     Logger.network.notice("\(error.localizedDescription) (\(requestURL))")
                 }
@@ -53,6 +64,7 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+
     static var previews: some View {
         ContentView()
     }
