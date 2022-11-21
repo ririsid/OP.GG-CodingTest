@@ -90,7 +90,7 @@ struct GameRow: View {
                 }
                 .padding(.leading, 2)
                 VStack(alignment: .leading, spacing: 2) {
-                    kdaText(kills: game.kills, deaths: game.deaths, assists: game.assists)
+                    kdaText(game.kills, game.deaths, game.assists)
                     killParticipationText(game.killParticipation)
                 }
                 .padding(.leading, 8)
@@ -147,14 +147,6 @@ struct GameRow: View {
         }
     }
 
-    @ViewBuilder private func resultBackgroundColor(isWin: Bool) -> some View {
-        if isWin {
-            Color.softBlue
-        } else {
-            Color.darkishPink
-        }
-    }
-
     @ViewBuilder private func badgeIcon(_ badge: OpScoreBadge) -> some View {
         if badge == .none {
             Color.clear
@@ -173,18 +165,7 @@ struct GameRow: View {
         }
     }
 
-    @ViewBuilder private func badgeBackgroundColor(_ badge: OpScoreBadge) -> some View {
-        switch badge {
-        case .ace:
-            Color.periwinkle
-        case .mvp:
-            Color.orangeYellow
-        case .none:
-            Color.clear
-        }
-    }
-
-    @ViewBuilder private func kdaText(kills: Int, deaths: Int, assists: Int) -> some View {
+    @ViewBuilder private func kdaText(_ kills: Int, _ deaths: Int, _ assists: Int) -> some View {
         HStack(spacing: 0) {
             Text("\(kills)")
                 .bold()
@@ -213,6 +194,21 @@ struct GameRow: View {
 
     private func result(isWin: Bool) -> LocalizedStringKey {
         return isWin ? "W" : "L"
+    }
+
+    private func resultBackgroundColor(isWin: Bool) -> Color {
+        return isWin ? .softBlue : .darkishPink
+    }
+
+    private func badgeBackgroundColor(_ badge: OpScoreBadge) -> Color {
+        switch badge {
+        case .ace:
+            return .periwinkle
+        case .mvp:
+            return .orangeYellow
+        case .none:
+            return .clear
+        }
     }
 }
 

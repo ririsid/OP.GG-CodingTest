@@ -12,3 +12,7 @@
 "L" = "L";
 "K/P %@" = "K/P %@";
 "%lldW %lldL (%@)" = "%lldW %lldL (%@)";
+"%lldW %lldL" = "%lldW %lldL";
+"Summary last %lld games" = "Summary last %lld games";
+"Most Win" = "Most Win";
+"Position" = "Position";

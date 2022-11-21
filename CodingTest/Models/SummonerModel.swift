@@ -28,7 +28,12 @@ extension SummonerModel {
         let lp: Int
 
         /// 승률
-        var winningPercentage: String {
+        var winningPercentage: Double {
+            Calculator.winningPercentage(wins: wins, losses: losses)
+        }
+
+        /// 승률
+        var winningPercentageString: String {
             Calculator.winningPercentage(wins: wins, losses: losses)
         }
     }

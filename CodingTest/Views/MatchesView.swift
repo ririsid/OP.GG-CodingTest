@@ -15,10 +15,106 @@ struct MatchesView: View {
 
     var body: some View {
         LazyVStack(spacing: 0) {
+            summaryRow
             ForEach(matches.games) { game in
                 GameRow(game: game)
             }
         }
+    }
+
+    var summaryRow: some View {
+        HStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Summary last \(matches.numberOfGames) games")
+                Spacer()
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(makeWinLoseString(matches.wins, matches.losses))
+                    kdaText(matches.kills, matches.deaths, matches.assists)
+                    Text(matches.kdaRatio)
+                        .foregroundColor(.greenBlue)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            VStack(spacing: 0) {
+                Text("Most Win")
+                Spacer()
+                HStack(spacing: 0) {
+                    Spacer()
+                    HStack(spacing: 16) {
+                        ForEach(matches.champions.prefix(2)) { champion in
+                            VStack(spacing: 4) {
+                                AsyncImage(url: champion.imageURL) {
+                                    $0.resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .clipShape(Circle())
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                .frame(width: 30, height: 30)
+
+                                Text(champion.winningPercentageString)
+                                    .foregroundColor(winningPercentageColor(champion.winningPercentage))
+                            }
+                        }
+                    }
+                    Spacer()
+                }
+            }
+            .frame(width: 98)
+            VStack(spacing: 0) {
+                Text("Position")
+                Spacer()
+                if let position = matches.position {
+                    VStack(spacing: 4) {
+                        Image(positionIconName(position.abbreviation))
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .frame(width: 30, height: 30)
+
+                        Text(position.winningPercentageString)
+                            .foregroundColor(winningPercentageColor(position.winningPercentage))
+                    }
+                }
+            }
+            .frame(width: 64)
+        }
+        .font(.system(size: 10))
+        .foregroundColor(.coolGrey)
+        .padding(12)
+        .frame(height: 90)
+    }
+
+    @ViewBuilder private func kdaText(_ kills: Int, _ deaths: Int, _ assists: Int) -> some View {
+        HStack(spacing: 0) {
+            Text("\(kills)")
+                .bold()
+            Text(" / ")
+            Text("\(deaths)")
+                .bold()
+                .foregroundColor(.darkishPink)
+            Text(" / ")
+            Text("\(assists)")
+                .bold()
+            Spacer()
+        }
+        .font(.system(size: 14))
+        .foregroundColor(.darkGrey)
+        .lineLimit(1)
+        .frame(maxWidth: .infinity)
+    }
+
+    // MARK: Methods
+
+    private func makeWinLoseString(_ wins: Int, _ losses: Int) -> LocalizedStringKey {
+        return "\(wins)W \(losses)L"
+    }
+
+    private func winningPercentageColor(_ winningPercentage: Double) -> Color {
+        return winningPercentage == 1 ? .darkishPink : .darkGrey
+    }
+
+    private func positionIconName(_ position: String) -> String {
+        return "iconLol\(position.capitalized)"
     }
 }
 

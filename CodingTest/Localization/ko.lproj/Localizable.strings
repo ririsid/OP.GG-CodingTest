@@ -12,3 +12,7 @@
 "L" = "패";
 "K/P %@" = "킬관여 %@";
 "%lldW %lldL (%@)" = "%lld승 %lld패 (%@)";
+"%lldW %lldL" = "%lld승 %lld패";
+"Summary last %lld games" = "최근 %lld게임 분석";
+"Most Win" = "모스트 승률";
+"Position" = "포지션";

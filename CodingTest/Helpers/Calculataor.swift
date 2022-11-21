@@ -25,14 +25,13 @@ final class Calculator {
         let value: Double = winningPercentage(wins: wins, losses: losses)
         let formatter = NumberFormatter()
         formatter.numberStyle = .percent
-        formatter.maximumFractionDigits = 2
-        return formatter.string(from: NSNumber(value: value)) ?? ""
+        return formatter.string(from: NSNumber(value: value)) ?? "-"
     }
 
     /// KDA 공식
     ///
     /// (kills + assists) / deaths
-    static func kdaPercentage(kills: Int, deaths: Int, assists: Int) -> Double {
+    static func kdaRatio(_ kills: Int, _ deaths: Int, _ assists: Int) -> Double {
         Double(kills + assists) / Double(deaths)
     }
 }

@@ -17,6 +17,10 @@ extension Color {
         Color(uiColor: UIColor(red: 152.0 / 255.0, green: 160.0 / 255.0, blue: 167.0 / 255.0, alpha: 1.0))
     }
 
+    static var greenBlue: Color {
+        Color(uiColor: UIColor(red: 10.0 / 255.0, green: 197.0 / 255.0, blue: 142.0 / 255.0, alpha: 1.0))
+    }
+
     static var darkishPink: Color {
         Color(uiColor: UIColor(red: 232.0 / 255.0, green: 64.0 / 255.0, blue: 87.0 / 255.0, alpha: 1.0))
     }
@@ -58,6 +62,7 @@ extension ShapeStyle where Self == Color {
 
     static var paleGrey: Color { .paleGrey }
     static var coolGrey: Color { .coolGrey }
+    static var greenBlue: Color { .greenBlue }
     static var darkishPink: Color { .darkishPink }
     static var steelGrey: Color { .steelGrey }
     static var orangeYellow: Color { .orangeYellow }

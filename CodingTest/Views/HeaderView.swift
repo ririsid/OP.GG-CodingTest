@@ -90,7 +90,7 @@ struct HeaderView: View {
                                     .font(.system(size: 12))
                                     .foregroundColor(.darkGrey)
                                 Spacer(minLength: 1)
-                                Text(makeWinLoseString(wins: league.wins, losses: league.losses, winningPercentage: league.winningPercentage))
+                                Text(makeWinLoseString(league.wins, league.losses, winningPercentage: league.winningPercentageString))
                                     .font(.textStyle4)
                                     .foregroundColor(.steelGrey)
                             }
@@ -128,7 +128,7 @@ struct HeaderView: View {
         return "\(value) LP"
     }
 
-    private func makeWinLoseString(wins: Int, losses: Int, winningPercentage: String) -> LocalizedStringKey {
+    private func makeWinLoseString(_ wins: Int, _ losses: Int, winningPercentage: String) -> LocalizedStringKey {
         return "\(wins)W \(losses)L (\(winningPercentage))"
     }
 }

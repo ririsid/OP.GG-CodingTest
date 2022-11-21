@@ -22,6 +22,19 @@ struct MatchesModel {
     var numberOfGames: Int {
         wins + losses
     }
+
+    /// KDA 공식
+    var kdaRatio: String {
+        let value = Calculator.kdaRatio(kills, deaths, assists)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        if let ratio = formatter.string(from: NSNumber(value: value)) {
+            return "\(ratio):1"
+        } else {
+            return "-"
+        }
+    }
 }
 
 extension MatchesModel {
@@ -34,7 +47,12 @@ extension MatchesModel {
         let losses: Int
 
         /// 승률
-        var winningPercentage: String {
+        var winningPercentage: Double {
+            Calculator.winningPercentage(wins: wins, losses: losses)
+        }
+
+        /// 승률
+        var winningPercentageString: String {
             Calculator.winningPercentage(wins: wins, losses: losses)
         }
     }
@@ -50,7 +68,12 @@ extension MatchesModel {
         let losses: Int
 
         /// 승률
-        var winningPercentage: String {
+        var winningPercentage: Double {
+            Calculator.winningPercentage(wins: wins, losses: losses)
+        }
+
+        /// 승률
+        var winningPercentageString: String {
             Calculator.winningPercentage(wins: wins, losses: losses)
         }
     }
@@ -83,7 +106,7 @@ extension MatchesModel {
             formatter.allowedUnits = gameLength >= 3600 ? [.hour, .minute, .second] : [.minute, .second]
             formatter.unitsStyle = .positional
             formatter.zeroFormattingBehavior = .pad
-            return formatter.string(from: TimeInterval(gameLength)) ?? ""
+            return formatter.string(from: TimeInterval(gameLength)) ?? "-"
         }
 
         /// 생성일
