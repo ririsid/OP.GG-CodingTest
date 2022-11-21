@@ -39,20 +39,20 @@ struct ContentView: View {
                 Text(recoverySuggestion)
             }
         }
-        .task(fetchData)
-        .refreshable(action: fetchData)
+        .task(loadData)
+        .refreshable(action: loadData)
     }
 
     // MARK: Methods
 
-    @Sendable private func fetchData() async {
+    @Sendable private func loadData() async {
         do {
-            self.summoner = SummonerModel(try await summonerService.fetchSummoner(summonerName))
-            self.matches = MatchesModel(try await summonerService.fetchSummonerMatches(summonerName))
+            summoner = SummonerModel(try await summonerService.fetchSummoner(summonerName))
+            matches = MatchesModel(try await summonerService.fetchSummonerMatches(summonerName))
         } catch {
             if let error = error as? APIError {
-                showAlert = true
                 apiError = error
+                showAlert = true
                 if let requestURL = error.response?.request?.url {
                     Logger.network.notice("\(error.localizedDescription) (\(requestURL))")
                 }
@@ -64,6 +64,7 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+
     static var previews: some View {
         ContentView()
     }

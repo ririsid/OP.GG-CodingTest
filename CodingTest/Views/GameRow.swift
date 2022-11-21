@@ -30,7 +30,7 @@ struct GameRow: View {
         .padding(.bottom, 4)
     }
 
-    var resultView: some View {
+    private var resultView: some View {
         VStack(spacing: 6) {
             Spacer()
             Text(result(isWin: game.isWin))
@@ -48,7 +48,7 @@ struct GameRow: View {
         .background(resultBackgroundColor(isWin: game.isWin))
     }
 
-    var gameInfoView: some View {
+    private var gameInfoView: some View {
         HStack(alignment: .top, spacing: 0) {
             HStack(alignment: .top, spacing: 0) {
                 ZStack(alignment: .top) {
@@ -98,6 +98,7 @@ struct GameRow: View {
             Spacer(minLength: 14)
             VStack(alignment: .trailing, spacing: 1) {
                 Text(game.gameType)
+                    .truncationMode(.tail)
                     .font(.textStyle)
                     .foregroundColor(.coolGrey)
                 Text(game.timeAgo)
@@ -108,7 +109,7 @@ struct GameRow: View {
         }
     }
 
-    var itemList: some View {
+    private var itemList: some View {
         HStack(alignment: .bottom, spacing: 2) {
             ForEach(0..<7) { index in
                 ZStack {
@@ -131,7 +132,7 @@ struct GameRow: View {
         }
     }
 
-    @ViewBuilder func resultBackgroundColor(isWin: Bool) -> some View {
+    @ViewBuilder private func resultBackgroundColor(isWin: Bool) -> some View {
         if isWin {
             Color.softBlue
         } else {
@@ -139,7 +140,7 @@ struct GameRow: View {
         }
     }
 
-    @ViewBuilder func badgeIcon(_ badge: OpScoreBadge) -> some View {
+    @ViewBuilder private func badgeIcon(_ badge: OpScoreBadge) -> some View {
         if badge == .none {
             Color.clear
                 .frame(width: 29, height: 16)
@@ -157,7 +158,7 @@ struct GameRow: View {
         }
     }
 
-    @ViewBuilder func badgeBackgroundColor(_ badge: OpScoreBadge) -> some View {
+    @ViewBuilder private func badgeBackgroundColor(_ badge: OpScoreBadge) -> some View {
         switch badge {
         case .ace:
             Color.periwinkle
@@ -168,7 +169,7 @@ struct GameRow: View {
         }
     }
 
-    @ViewBuilder func kdaText(kills: Int, deaths: Int, assists: Int) -> some View {
+    @ViewBuilder private func kdaText(kills: Int, deaths: Int, assists: Int) -> some View {
         HStack(spacing: 0) {
             Text("\(kills)")
                 .bold()
@@ -179,12 +180,15 @@ struct GameRow: View {
             Text(" / ")
             Text("\(assists)")
                 .bold()
+            Spacer()
         }
         .font(.system(size: 16))
         .foregroundColor(.darkGrey)
+        .lineLimit(1)
+        .frame(maxWidth: .infinity)
     }
 
-    @ViewBuilder func killParticipationText(_ killParticipation: String) -> some View {
+    @ViewBuilder private func killParticipationText(_ killParticipation: String) -> some View {
         Text("K/P \(killParticipation)")
             .font(.textStyle)
             .foregroundColor(.gunmetal)

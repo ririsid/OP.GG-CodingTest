@@ -35,15 +35,4 @@ final class Calculator {
     static func kdaPercentage(kills: Int, deaths: Int, assists: Int) -> Double {
         Double(kills + assists) / Double(deaths)
     }
-
-    /// KDA 공식
-    ///
-    /// (kills + assists) / deaths
-    static func kdaPercentage(kills: Int, deaths: Int, assists: Int) -> String {
-        let value: Double = kdaPercentage(kills: kills, deaths: deaths, assists: assists)
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        formatter.maximumFractionDigits = 0
-        return formatter.string(from: NSNumber(value: value)) ?? ""
-    }
 }

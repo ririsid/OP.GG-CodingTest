@@ -21,7 +21,7 @@ struct HeaderView: View {
         .padding(.vertical, 8)
     }
 
-    var profile: some View {
+    private var profile: some View {
         HStack(spacing: 16) {
             ZStack(alignment: .bottomTrailing) {
                 AsyncImage(url: summoner.profileImageURL) {
@@ -62,10 +62,12 @@ struct HeaderView: View {
         .padding(16)
     }
 
-    var leagues: some View {
+    private var leagues: some View {
         GeometryReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
+                    Spacer()
+                        .frame(width: 8)
                     ForEach(summoner.leagues) { league in
                         HStack(spacing: 8) {
                             AsyncImage(url: league.tierImageURL) {
@@ -79,6 +81,7 @@ struct HeaderView: View {
                                 Text(league.tierName)
                                     .font(.textStyle)
                                     .foregroundColor(.softBlue)
+                                Spacer(minLength: 0)
                                 Text(league.tier)
                                     .font(.textStyle3)
                                     .foregroundColor(.darkGrey)
@@ -107,11 +110,13 @@ struct HeaderView: View {
                         .cornerRadius(4)
                         .shadow(color: .steelGrey.opacity(0.2), radius: 3, y: 4)
                     }
+                    Spacer()
+                        .frame(width: 8)
                 }
             }
         }
         .frame(height: 100)
-        .padding(8)
+        .padding(.vertical, 8)
     }
 
     // MARK: Methods
@@ -123,8 +128,8 @@ struct HeaderView: View {
         return "\(value) LP"
     }
 
-    private func makeWinLoseString(wins: Int, losses: Int, winningPercentage: String) -> String {
-        return "\(wins)승 \(losses)패 (\(winningPercentage))"
+    private func makeWinLoseString(wins: Int, losses: Int, winningPercentage: String) -> LocalizedStringKey {
+        return "\(wins)W \(losses)L (\(winningPercentage))"
     }
 }
 

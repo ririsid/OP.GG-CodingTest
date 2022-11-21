@@ -26,6 +26,11 @@ extension SummonerModel {
         let tier: String
         let tierImageURL: URL
         let lp: Int
+
+        /// 승률
+        var winningPercentage: String {
+            Calculator.winningPercentage(wins: wins, losses: losses)
+        }
     }
 }
 
@@ -48,10 +53,5 @@ extension SummonerModel.League {
         self.tier = league.tierRank.tier
         self.tierImageURL = league.tierRank.imageURL
         self.lp = league.tierRank.lp
-    }
-
-    /// 승률
-    var winningPercentage: String {
-        Calculator.winningPercentage(wins: wins, losses: losses)
     }
 }

@@ -87,7 +87,7 @@ extension MatchesModel {
 
         /// 생성일
         var createdAt: Date {
-            Date(timeIntervalSince1970: Double(createDate))
+            Date(timeIntervalSince1970: TimeInterval(createDate))
         }
 
         /// 지난 시간
