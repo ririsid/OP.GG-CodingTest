@@ -99,6 +99,7 @@ extension MatchesModel {
         let runeImageURLs: [URL]
         let itemImageURLs: [URL]
         let wardImageURL: URL?
+        let largestMultiKillString: String
 
         /// 게임 시간
         var gameTime: String {
@@ -178,5 +179,6 @@ extension MatchesModel.Game {
         self.runeImageURLs = game.peak
         self.itemImageURLs = game.items.dropLast().map({ $0.imageURL })
         self.wardImageURL = game.items.last?.imageURL
+        self.largestMultiKillString = game.stats.general.largestMultiKillString
     }
 }

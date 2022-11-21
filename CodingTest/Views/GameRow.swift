@@ -19,7 +19,23 @@ struct GameRow: View {
             VStack(spacing: 0) {
                 gameInfoView
                 Spacer()
-                itemList
+                HStack {
+                    itemList
+                    Spacer()
+                    if !game.largestMultiKillString.isEmpty {
+                        Text(game.largestMultiKillString)
+                            .font(.system(size: 10))
+                            .foregroundColor(.darkishPink)
+                            .padding(.horizontal, 8)
+                            .frame(height: 20)
+                            .background(.white)
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .strokeBorder(.darkishPink, lineWidth: 1)
+                            )
+                    }
+                }
             }
             .padding(16)
         }
@@ -143,7 +159,6 @@ struct GameRow: View {
                 }
             }
             .frame(width: 24, height: 24)
-            Spacer()
         }
     }
 
@@ -215,6 +230,6 @@ struct GameRow: View {
 struct GameRow_Previews: PreviewProvider {
 
     static var previews: some View {
-        GameRow(game: .init(gameId: "371807637", isWin: false, gameLength: 1431, gameType: "무작위 총력전", createDate: 1668568946, kills: 5, deaths: 8, assists: 2, killParticipation: "30%", championImageURL: URL(string: "https://opgg-static.akamaized.net/images/lol/champion/Malzahar.png")!, badge: .mvp, spellImageURLs: [URL(string: "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png")!, URL(string: "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png")!], runeImageURLs: [URL(string: "https://opgg-static.akamaized.net/images/lol/perk/8229.png")!, URL(string: "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png")!], itemImageURLs: [URL(string: "https://opgg-static.akamaized.net/images/lol/item/1026.png")!, URL(string: "https://opgg-static.akamaized.net/images/lol/item/3020.png")!, URL(string: "https://opgg-static.akamaized.net/images/lol/item/1056.png")!], wardImageURL: URL(string: "https://opgg-static.akamaized.net/images/lol/item/3340.png")!))
+        GameRow(game: .init(gameId: "371807637", isWin: false, gameLength: 1431, gameType: "무작위 총력전", createDate: 1668568946, kills: 5, deaths: 8, assists: 2, killParticipation: "30%", championImageURL: URL(string: "https://opgg-static.akamaized.net/images/lol/champion/Malzahar.png")!, badge: .mvp, spellImageURLs: [URL(string: "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png")!, URL(string: "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png")!], runeImageURLs: [URL(string: "https://opgg-static.akamaized.net/images/lol/perk/8229.png")!, URL(string: "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png")!], itemImageURLs: [URL(string: "https://opgg-static.akamaized.net/images/lol/item/1026.png")!, URL(string: "https://opgg-static.akamaized.net/images/lol/item/3020.png")!, URL(string: "https://opgg-static.akamaized.net/images/lol/item/1056.png")!], wardImageURL: URL(string: "https://opgg-static.akamaized.net/images/lol/item/3340.png")!, largestMultiKillString: "Double Kill"))
     }
 }

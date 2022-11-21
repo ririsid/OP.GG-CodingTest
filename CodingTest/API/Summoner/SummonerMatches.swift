@@ -87,13 +87,8 @@ struct General: Codable {
     let csPerMin: Double
     let contributionForKillRate: String
     let goldEarned, totalDamageDealtToChampions: Int
-    let largestMultiKillString: LargestMultiKillString
+    let largestMultiKillString: String
     let opScoreBadge: OpScoreBadge
-}
-
-enum LargestMultiKillString: String, Codable {
-    case doubleKill = "Double Kill"
-    case empty = ""
 }
 
 enum OpScoreBadge: String, Codable {
