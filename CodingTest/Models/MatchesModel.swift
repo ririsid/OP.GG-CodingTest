@@ -75,6 +75,7 @@ extension MatchesModel {
         let spellImageURLs: [URL]
         let runeImageURLs: [URL]
         let itemImageURLs: [URL]
+        let wardImageURL: URL?
 
         /// 게임 시간
         var gameTime: String {
@@ -152,6 +153,7 @@ extension MatchesModel.Game {
         self.badge = game.stats.general.opScoreBadge
         self.spellImageURLs = game.spells.map({ $0.imageURL })
         self.runeImageURLs = game.peak
-        self.itemImageURLs = game.items.map({ $0.imageURL })
+        self.itemImageURLs = game.items.dropLast().map({ $0.imageURL })
+        self.wardImageURL = game.items.last?.imageURL
     }
 }
