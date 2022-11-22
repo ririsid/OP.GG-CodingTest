@@ -22,6 +22,11 @@ struct MatchesView: View {
                     summaryRow(matches)
                     ForEach(matches.games) { game in
                         GameRow(game: game)
+                            .task {
+                                if game == matches.games.last {
+                                    viewStore.send(.lastItemPresented(game.createDate))
+                                }
+                            }
                     }
                 }
             }

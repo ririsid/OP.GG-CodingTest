@@ -22,6 +22,7 @@ struct AppReducer: ReducerProtocol {
     enum Action: Equatable {
         case onAppear(name: String)
         case dataLoaded(TaskResult<SummonerAndMatchesModel>)
+        case matchesAdded(TaskResult<MatchesModel>)
         case apiErrorAlertDismissed
         case summoner(SummonerReducer.Action)
         case matches(MatchesReducer.Action)
@@ -46,6 +47,13 @@ struct AppReducer: ReducerProtocol {
             state.apiError = error as? APIError
             state.showAlert = true
             return .none
+        case let .matchesAdded(.success(data)):
+            state.matches = .init(matches: state.matches?.matches?.merged(with: data))
+            return .none
+        case let .matchesAdded(.failure(error)):
+            state.apiError = error as? APIError
+            state.showAlert = true
+            return .none
         case .apiErrorAlertDismissed:
             state.apiError = nil
             state.showAlert = false
@@ -58,8 +66,14 @@ struct AppReducer: ReducerProtocol {
                     }
                 )
             }
-        case .matches(.lastItemPresented):
-            return .none
+        case let .matches(.lastItemPresented(lastMatch)):
+            return .task { [name = state.name!] in
+                await .matchesAdded(
+                    TaskResult {
+                        MatchesModel(try await summonerService.fetchSummonerMatches(name, lastMatch: lastMatch))
+                    }
+                )
+            }
         }
     }
 }

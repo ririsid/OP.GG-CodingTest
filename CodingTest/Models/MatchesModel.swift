@@ -140,6 +140,27 @@ extension MatchesModel {
         }
         self.games = matches.games.map(Game.init)
     }
+
+    func merged(with other: Self) -> MatchesModel {
+        let wins = self.wins + other.wins
+        let losses = self.losses + other.losses
+        let kills = self.kills + other.kills
+        let deaths = self.deaths + other.deaths
+        let assists = self.assists + other.assists
+        let champions = self.champions + other.champions
+        let position = self.position ?? other.position
+        let games = self.games + other.games
+        let merged = MatchesModel(
+            wins: wins,
+            losses: losses,
+            kills: kills,
+            deaths: deaths,
+            assists: assists,
+            champions: champions,
+            position: position,
+            games: games)
+        return merged
+    }
 }
 
 extension MatchesModel.Champion {

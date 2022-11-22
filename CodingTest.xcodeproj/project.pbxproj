@@ -151,10 +151,10 @@
 				7118A9B12924C0CF004D92DD /* CodingTestApp.swift */,
 				7118A9B32924C0CF004D92DD /* ContentView.swift */,
 				7118A9F22924EABF004D92DD /* API */,
-				719798F9292B6C650032EDD4 /* Domains */,
 				7118A9E82924CE14004D92DD /* Helpers */,
 				7118A9F82926030A004D92DD /* Localization */,
 				7118AA0829261F40004D92DD /* Models */,
+				719798F9292B6C650032EDD4 /* Reducers */,
 				7118A9E52924CC7E004D92DD /* Services */,
 				7118AA0529261EB4004D92DD /* Views */,
 				7118A9B52924C0D0004D92DD /* Assets.xcassets */,
@@ -266,14 +266,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		719798F9292B6C650032EDD4 /* Domains */ = {
+		719798F9292B6C650032EDD4 /* Reducers */ = {
 			isa = PBXGroup;
 			children = (
 				719798FA292B6CAF0032EDD4 /* AppReducer.swift */,
 				71979900292C9B3C0032EDD4 /* SummonerReducer.swift */,
 				71979902292CA71B0032EDD4 /* MatchesReducer.swift */,
 			);
-			path = Domains;
+			path = Reducers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

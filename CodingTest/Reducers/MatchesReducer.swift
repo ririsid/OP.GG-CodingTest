@@ -14,7 +14,7 @@ struct MatchesReducer: ReducerProtocol {
     }
 
     enum Action: Equatable {
-        case lastItemPresented
+        case lastItemPresented(UInt)
     }
 
     func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
