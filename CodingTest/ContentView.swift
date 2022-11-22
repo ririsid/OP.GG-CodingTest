@@ -7,57 +7,40 @@
 
 import SwiftUI
 
+import ComposableArchitecture
+
 struct ContentView: View {
 
+    let store: StoreOf<AppReducer>
     let summonerName: String = "genetory"
 
-    let summonerService: SummonerService = .init()
-
-    @State private var apiError: APIError? = nil
-    @State private var showAlert = false
-    @State private var summoner: SummonerModel? = nil
-    @State private var matches: MatchesModel? = nil
+    @State private var showAlert: Bool = false
 
     // MARK: Views
 
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 0) {
-                if let summoner {
-                    HeaderView(summoner: summoner)
-                }
-                if let matches {
-                    MatchesView(matches: matches)
+        WithViewStore(store) { viewStore in
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    IfLetStore(store.scope(state: \.summoner, action: AppReducer.Action.summoner)) {
+                        HeaderView(store: $0)
+                    }
+                    IfLetStore(store.scope(state: \.matches, action: AppReducer.Action.matches)) {
+                        MatchesView(store: $0)
+                    }
                 }
             }
-        }
-        .background(.paleGrey)
-        .alert(isPresented: $showAlert, error: apiError) { _ in
-            Button("OK") {}
-        } message: { error in
-            if let recoverySuggestion = error.recoverySuggestion {
-                Text(recoverySuggestion)
-            }
-        }
-        .task(loadData)
-        .refreshable(action: loadData)
-    }
-
-    // MARK: Methods
-
-    @Sendable private func loadData() async {
-        do {
-            summoner = SummonerModel(try await summonerService.fetchSummoner(summonerName))
-            matches = MatchesModel(try await summonerService.fetchSummonerMatches(summonerName))
-        } catch {
-            if let error = error as? APIError {
-                apiError = error
-                showAlert = true
-                if let requestURL = error.response?.request?.url {
-                    Logger.network.notice("\(error.localizedDescription) (\(requestURL))")
+            .background(.paleGrey)
+            .alert(isPresented: viewStore.binding(get: \.showAlert, send: .apiErrorAlertDismissed),
+                   error: viewStore.apiError) { _ in
+                Button("OK") {}
+            } message: { error in
+                if let recoverySuggestion = error.recoverySuggestion {
+                    Text(recoverySuggestion)
                 }
-            } else {
-                Logger.network.notice("\(error.localizedDescription)")
+            }
+            .task {
+                await viewStore.send(.onAppear(name: summonerName)).finish()
             }
         }
     }
@@ -66,6 +49,9 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
 
     static var previews: some View {
-        ContentView()
+        ContentView(store: .init(
+            initialState: AppReducer.State(),
+            reducer: AppReducer()
+        ))
     }
 }

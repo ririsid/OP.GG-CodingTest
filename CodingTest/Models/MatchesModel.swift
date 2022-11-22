@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MatchesModel {
+struct MatchesModel: Equatable {
 
     let wins: Int
     let losses: Int
@@ -39,7 +39,7 @@ struct MatchesModel {
 
 extension MatchesModel {
 
-    struct Champion: Identifiable {
+    struct Champion: Identifiable, Equatable {
 
         let id: Int
         let imageURL: URL
@@ -60,7 +60,7 @@ extension MatchesModel {
 
 extension MatchesModel {
 
-    struct Position: Identifiable {
+    struct Position: Identifiable, Equatable {
 
         var id: String { abbreviation }
         let abbreviation: String
@@ -81,7 +81,7 @@ extension MatchesModel {
 
 extension MatchesModel {
 
-    struct Game: Identifiable {
+    struct Game: Identifiable, Equatable {
 
         var id: String { gameId }
         let gameId: String

@@ -35,6 +35,10 @@
 		715954642927E6E7003253E6 /* GameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715954632927E6E7003253E6 /* GameRow.swift */; };
 		715954662927E905003253E6 /* CollectionExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715954652927E905003253E6 /* CollectionExtentions.swift */; };
 		719798F8292B6A160032EDD4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 719798F7292B6A160032EDD4 /* ComposableArchitecture */; };
+		719798FB292B6CAF0032EDD4 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719798FA292B6CAF0032EDD4 /* AppReducer.swift */; };
+		71979901292C9B3C0032EDD4 /* SummonerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71979900292C9B3C0032EDD4 /* SummonerReducer.swift */; };
+		71979903292CA71B0032EDD4 /* MatchesReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71979902292CA71B0032EDD4 /* MatchesReducer.swift */; };
+		71FAB343292CABF600F837F9 /* SummonerAndMatchesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FAB342292CABF600F837F9 /* SummonerAndMatchesModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +90,10 @@
 		7118AA132927BF84004D92DD /* MatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesView.swift; sourceTree = "<group>"; };
 		715954632927E6E7003253E6 /* GameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRow.swift; sourceTree = "<group>"; };
 		715954652927E905003253E6 /* CollectionExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtentions.swift; sourceTree = "<group>"; };
+		719798FA292B6CAF0032EDD4 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		71979900292C9B3C0032EDD4 /* SummonerReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerReducer.swift; sourceTree = "<group>"; };
+		71979902292CA71B0032EDD4 /* MatchesReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesReducer.swift; sourceTree = "<group>"; };
+		71FAB342292CABF600F837F9 /* SummonerAndMatchesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerAndMatchesModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +151,7 @@
 				7118A9B12924C0CF004D92DD /* CodingTestApp.swift */,
 				7118A9B32924C0CF004D92DD /* ContentView.swift */,
 				7118A9F22924EABF004D92DD /* API */,
+				719798F9292B6C650032EDD4 /* Domains */,
 				7118A9E82924CE14004D92DD /* Helpers */,
 				7118A9F82926030A004D92DD /* Localization */,
 				7118AA0829261F40004D92DD /* Models */,
@@ -252,8 +261,19 @@
 			children = (
 				7118AA0929261F5D004D92DD /* SummonerModel.swift */,
 				7118AA0F29277AFF004D92DD /* MatchesModel.swift */,
+				71FAB342292CABF600F837F9 /* SummonerAndMatchesModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		719798F9292B6C650032EDD4 /* Domains */ = {
+			isa = PBXGroup;
+			children = (
+				719798FA292B6CAF0032EDD4 /* AppReducer.swift */,
+				71979900292C9B3C0032EDD4 /* SummonerReducer.swift */,
+				71979902292CA71B0032EDD4 /* MatchesReducer.swift */,
+			);
+			path = Domains;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,6 +417,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71FAB343292CABF600F837F9 /* SummonerAndMatchesModel.swift in Sources */,
 				715954662927E905003253E6 /* CollectionExtentions.swift in Sources */,
 				7118A9F72924F48B004D92DD /* APIError.swift in Sources */,
 				7118A9F52924EB92004D92DD /* SummonerData.swift in Sources */,
@@ -404,6 +425,9 @@
 				7118AA0E29262E9B004D92DD /* Font.swift in Sources */,
 				7118A9B42924C0CF004D92DD /* ContentView.swift in Sources */,
 				7118A9EF2924DE19004D92DD /* SummonerService.swift in Sources */,
+				719798FB292B6CAF0032EDD4 /* AppReducer.swift in Sources */,
+				71979901292C9B3C0032EDD4 /* SummonerReducer.swift in Sources */,
+				71979903292CA71B0032EDD4 /* MatchesReducer.swift in Sources */,
 				7118AA0C29262BAB004D92DD /* Color.swift in Sources */,
 				7118AA1029277AFF004D92DD /* MatchesModel.swift in Sources */,
 				7118AA1229277D4B004D92DD /* Calculataor.swift in Sources */,

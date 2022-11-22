@@ -1,7 +1,7 @@
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
 //
-//   let genetory = try? newJSONDecoder().decode(Genetory.self, from: jsonData)
+//   let genetory = try? newJSONDecoder().decode(SummonerData.self, from: jsonData)
 
 import Foundation
 
