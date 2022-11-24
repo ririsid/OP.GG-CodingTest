@@ -13,6 +13,7 @@ struct AppReducer: ReducerProtocol {
 
     struct State: Equatable {
         var name: String?
+        var isLoading: Bool = false
         var apiError: APIError?
         var showAlert: Bool = false
         var summoner: SummonerReducer.State?
@@ -31,7 +32,11 @@ struct AppReducer: ReducerProtocol {
     func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
         case .onAppear(let name):
+            // `isLoading`이 아닐 때만 데이터를 가져오자.
+            guard !state.isLoading else { return .none }
+
             state.name = name
+            state.isLoading = true
             return .task {
                 await .dataLoaded(
                     TaskResult {
@@ -40,10 +45,14 @@ struct AppReducer: ReducerProtocol {
                 )
             }
         case let .dataLoaded(.success(data)):
+            state.isLoading = false
+            state.summoner?.isUpdating = false
             state.summoner = .init(summoner: data.summoner)
             state.matches = .init(matches: data.matches)
             return .none
         case let .dataLoaded(.failure(error)):
+            state.isLoading = false
+            state.summoner?.isUpdating = false
             state.apiError = error as? APIError
             state.showAlert = true
             return .none
@@ -52,6 +61,10 @@ struct AppReducer: ReducerProtocol {
             state.showAlert = false
             return .none
         case .summoner(.updateButtonTapped):
+            // `isUpdating`이 아닐 때만 데이터를 가져오자.
+            guard state.summoner?.isUpdating == false else { return .none }
+
+            state.summoner?.isUpdating = true
             return .task { [name = state.name!] in
                 await .dataLoaded(
                     TaskResult {
@@ -61,9 +74,8 @@ struct AppReducer: ReducerProtocol {
             }
         case let .matches(.lastItemPresented(lastMatch)):
             // `isLoading`이 아닐 때만 데이터를 가져오자.
-            guard state.matches?.isLoading == false else {
-                return .none
-            }
+            guard state.matches?.isLoading == false else { return .none }
+
             state.matches?.isLoading = true
             return .task { [name = state.name!] in
                 await .matchesAdded(

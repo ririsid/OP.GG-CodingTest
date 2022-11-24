@@ -20,14 +20,20 @@ struct ContentView: View {
 
     var body: some View {
         WithViewStore(store) { viewStore in
-            ScrollView {
-                LazyVStack(spacing: 0) {
-                    IfLetStore(store.scope(state: \.summoner, action: AppReducer.Action.summoner)) {
-                        HeaderView(store: $0)
+            ZStack {
+                if !viewStore.isLoading {
+                    ScrollView {
+                        LazyVStack(spacing: 0) {
+                            IfLetStore(store.scope(state: \.summoner, action: AppReducer.Action.summoner)) {
+                                HeaderView(store: $0)
+                            }
+                            IfLetStore(store.scope(state: \.matches, action: AppReducer.Action.matches)) {
+                                MatchesView(store: $0)
+                            }
+                        }
                     }
-                    IfLetStore(store.scope(state: \.matches, action: AppReducer.Action.matches)) {
-                        MatchesView(store: $0)
-                    }
+                } else {
+                    ProgressView()
                 }
             }
             .background(.paleGrey)

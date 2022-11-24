@@ -56,14 +56,20 @@ struct HeaderView: View {
                     Button(action: {
                         viewStore.send(.updateButtonTapped)
                     }) {
-                        Text("Update")
-                            .font(.system(size: 14))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 20)
-                            .frame(height: 40)
-                            .background(.softBlue)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                        ZStack {
+                            Text("Update")
+                                .font(.system(size: 14))
+                                .foregroundColor(viewStore.isUpdating ? .clear : .white)
+                                .padding(.horizontal, 20)
+                                .frame(height: 40)
+                                .background(.softBlue.opacity(viewStore.isUpdating ? 0.3 : 1))
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                            if viewStore.isUpdating {
+                                ProgressView()
+                            }
+                        }
                     }
+                    .disabled(viewStore.isUpdating)
                 }
                 .frame(height: 88)
                 Spacer()
