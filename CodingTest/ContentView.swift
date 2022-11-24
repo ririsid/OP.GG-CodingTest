@@ -36,6 +36,7 @@ struct ContentView: View {
                     ProgressView()
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.paleGrey)
             .alert(isPresented: viewStore.binding(get: \.showAlert, send: .apiErrorAlertDismissed),
                    error: viewStore.apiError) { _ in
