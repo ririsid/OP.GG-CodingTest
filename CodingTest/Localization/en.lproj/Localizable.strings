@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  CodingTest
+
+  Created by 박정연 on 2022/11/17.
+  
+*/
+
+"OK" = "OK";
+"Update" = "Update";
+"W" = "W";
+"L" = "L";
+"K/P %@" = "K/P %@";
+"%lldW %lldL (%@)" = "%lldW %lldL (%@)";
+"%lldW %lldL" = "%lldW %lldL";
+"Summary last %lld games" = "Summary last %lld games";
+"Most Win" = "Most Win";
+"Position" = "Position";

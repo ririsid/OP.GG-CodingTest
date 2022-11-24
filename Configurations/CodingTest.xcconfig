@@ -1,0 +1,11 @@
+//
+//  CodingTest.xcconfig
+//  CodingTest
+//
+//  Created by 박정연 on 2022/11/16.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_BASE_URL = https:/$()/codingtest.op.gg/api
