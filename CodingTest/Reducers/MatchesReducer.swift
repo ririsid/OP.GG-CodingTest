@@ -11,6 +11,7 @@ struct MatchesReducer: ReducerProtocol {
 
     struct State: Equatable {
         var matches: MatchesModel?
+        var isLoading: Bool = false
     }
 
     enum Action: Equatable {

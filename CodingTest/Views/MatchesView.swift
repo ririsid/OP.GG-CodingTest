@@ -18,16 +18,17 @@ struct MatchesView: View {
     var body: some View {
         WithViewStore(store) { viewStore in
             if let matches = viewStore.matches {
-                LazyVStack(spacing: 0) {
-                    summaryRow(matches)
-                    ForEach(matches.games) { game in
-                        GameRow(game: game)
-                            .task {
-                                if game == matches.games.last {
-                                    viewStore.send(.lastItemPresented(game.createDate))
-                                }
+                summaryRow(matches)
+                ForEach(matches.games) { game in
+                    GameRow(game: game)
+                        .task {
+                            if game == matches.games.last, !viewStore.isLoading {
+                                viewStore.send(.lastItemPresented(game.createDate))
                             }
-                    }
+                        }
+                }
+                if viewStore.isLoading {
+                    ProgressRow()
                 }
             }
         }
