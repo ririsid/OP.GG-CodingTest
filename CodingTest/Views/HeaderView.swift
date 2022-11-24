@@ -7,62 +7,78 @@
 
 import SwiftUI
 
+import ComposableArchitecture
+
 struct HeaderView: View {
 
-    let summoner: SummonerModel
+    let store: StoreOf<SummonerReducer>
 
     // MARK: Views
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            profile
-            leagues
+        WithViewStore(store) { viewStore in
+            VStack(alignment: .leading, spacing: 0) {
+                if let summoner = viewStore.summoner {
+                    profile(summoner)
+                    leagues(summoner)
+                }
+            }
+            .padding(.vertical, 8)
         }
-        .padding(.vertical, 8)
     }
 
-    private var profile: some View {
-        HStack(spacing: 16) {
-            ZStack(alignment: .bottomTrailing) {
-                AsyncImage(url: summoner.profileImageURL) {
-                    $0.resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: 88, height: 88)
-                Text("\(summoner.level)")
-                    .font(.textStyle5)
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 12)
-                    .frame(height: 24)
-                    .background(.darkGrey90)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-            }
-            VStack(alignment: .leading) {
-                Text(summoner.name)
-                    .font(.textStyle2)
-                    .tracking(-0.7)
-                    .foregroundColor(.darkGrey)
-                Spacer()
-                Button(action: {}) {
-                    Text("Update")
-                        .font(.system(size: 14))
+    @ViewBuilder private func profile(_ summoner: SummonerModel) -> some View {
+        WithViewStore(store) { viewStore in
+            HStack(spacing: 16) {
+                ZStack(alignment: .bottomTrailing) {
+                    AsyncImage(url: summoner.profileImageURL) {
+                        $0.resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(Circle())
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: 88, height: 88)
+                    Text("\(summoner.level)")
+                        .font(.textStyle5)
                         .foregroundColor(.white)
-                        .padding(.horizontal, 20)
-                        .frame(height: 40)
-                        .background(.softBlue)
+                        .padding(.horizontal, 12)
+                        .frame(height: 24)
+                        .background(.darkGrey90)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
+                VStack(alignment: .leading) {
+                    Text(summoner.name)
+                        .font(.textStyle2)
+                        .tracking(-0.7)
+                        .foregroundColor(.darkGrey)
+                    Spacer()
+                    Button(action: {
+                        viewStore.send(.updateButtonTapped)
+                    }) {
+                        ZStack {
+                            Text("Update")
+                                .font(.system(size: 14))
+                                .foregroundColor(viewStore.isUpdating ? .clear : .white)
+                                .padding(.horizontal, 20)
+                                .frame(height: 40)
+                                .background(.softBlue.opacity(viewStore.isUpdating ? 0.3 : 1))
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                            if viewStore.isUpdating {
+                                ProgressView()
+                            }
+                        }
+                    }
+                    .disabled(viewStore.isUpdating)
+                }
+                .frame(height: 88)
+                Spacer()
             }
-            .frame(height: 88)
-            Spacer()
+            .padding(16)
         }
-        .padding(16)
     }
 
-    private var leagues: some View {
+    @ViewBuilder private func leagues(_ summoner: SummonerModel) -> some View {
         GeometryReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
@@ -136,7 +152,10 @@ struct HeaderView: View {
 struct HeaderView_Previews: PreviewProvider {
 
     static var previews: some View {
-        HeaderView(summoner: .init(name: "genetory", level: 44, profileImageURL: URL(string: "https://opgg-static.akamaized.net/images/profile_icons/profileIcon1625.jpg")!, leagues: [.init(wins: 345, losses: 940, tierName: "솔랭", tier: "Silver", tierImageURL: URL(string: "https://opgg-static.akamaized.net/images/medals/silver_1.png")!, lp: 535), .init(wins: 879, losses: 896, tierName: "자유 5:5 랭크", tier: "Grandmaster", tierImageURL: URL(string: "https://opgg-static.akamaized.net/images/medals/grandmaster_1.png")!, lp: 485)]))
-            .background(.paleGrey)
+        HeaderView(store: .init(
+            initialState: .init(summoner: .init(name: "genetory", level: 44, profileImageURL: URL(string: "https://opgg-static.akamaized.net/images/profile_icons/profileIcon1625.jpg")!, leagues: [.init(wins: 345, losses: 940, tierName: "솔랭", tier: "Silver", tierImageURL: URL(string: "https://opgg-static.akamaized.net/images/medals/silver_1.png")!, lp: 535), .init(wins: 879, losses: 896, tierName: "자유 5:5 랭크", tier: "Grandmaster", tierImageURL: URL(string: "https://opgg-static.akamaized.net/images/medals/grandmaster_1.png")!, lp: 485)])),
+            reducer: SummonerReducer()
+        ))
+        .background(.paleGrey)
     }
 }

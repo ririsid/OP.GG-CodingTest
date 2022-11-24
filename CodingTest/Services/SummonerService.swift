@@ -59,4 +59,25 @@ final class SummonerService {
                 .store(in: &cancellables)
         }
     }
+
+    /// 소환사 및 게임 정보 가져오기
+    func fetchSummonerAndMatches(_ name: String, callbackQueue: DispatchQueue? = .none) -> AnyPublisher<(Summoner, SummonerMatches), APIError> {
+        return fetchSummoner(name, callbackQueue: callbackQueue)
+            .combineLatest(fetchSummonerMatches(name, callbackQueue: callbackQueue))
+            .eraseToAnyPublisher()
+    }
+
+    /// 소환사 및 게임 정보 가져오기
+    func fetchSummonerAndMatches(_ name: String, lastMatch: UInt? = nil) async throws -> (Summoner, SummonerMatches) {
+        return try await withCheckedThrowingContinuation { continuation in
+            fetchSummonerAndMatches(name)
+                .sink { completion in
+                    guard case let .failure(error) = completion else { return }
+                    continuation.resume(throwing: error)
+                } receiveValue: { data in
+                    continuation.resume(returning: data)
+                }
+                .store(in: &cancellables)
+        }
+    }
 }

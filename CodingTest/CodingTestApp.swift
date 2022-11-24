@@ -7,11 +7,16 @@
 
 import SwiftUI
 
+import ComposableArchitecture
+
 @main
 struct CodingTestApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: .init(
+                initialState: AppReducer.State(),
+                reducer: AppReducer()
+            ))
         }
     }
 }

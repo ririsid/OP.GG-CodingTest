@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MatchesModel {
+struct MatchesModel: Equatable {
 
     let wins: Int
     let losses: Int
@@ -39,7 +39,7 @@ struct MatchesModel {
 
 extension MatchesModel {
 
-    struct Champion: Identifiable {
+    struct Champion: Identifiable, Equatable {
 
         let id: Int
         let imageURL: URL
@@ -60,7 +60,7 @@ extension MatchesModel {
 
 extension MatchesModel {
 
-    struct Position: Identifiable {
+    struct Position: Identifiable, Equatable {
 
         var id: String { abbreviation }
         let abbreviation: String
@@ -81,7 +81,7 @@ extension MatchesModel {
 
 extension MatchesModel {
 
-    struct Game: Identifiable {
+    struct Game: Identifiable, Equatable {
 
         var id: String { gameId }
         let gameId: String
@@ -139,6 +139,27 @@ extension MatchesModel {
             self.position = nil
         }
         self.games = matches.games.map(Game.init)
+    }
+
+    func merged(with other: Self) -> MatchesModel {
+        let wins = self.wins + other.wins
+        let losses = self.losses + other.losses
+        let kills = self.kills + other.kills
+        let deaths = self.deaths + other.deaths
+        let assists = self.assists + other.assists
+        let champions = self.champions + other.champions
+        let position = self.position ?? other.position
+        let games = self.games + other.games
+        let merged = MatchesModel(
+            wins: wins,
+            losses: losses,
+            kills: kills,
+            deaths: deaths,
+            assists: assists,
+            champions: champions,
+            position: position,
+            games: games)
+        return merged
     }
 }
 

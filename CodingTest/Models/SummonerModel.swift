@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SummonerModel {
+struct SummonerModel: Equatable {
 
     let name: String
     let level: Int
@@ -17,7 +17,7 @@ struct SummonerModel {
 
 extension SummonerModel {
 
-    struct League: Identifiable {
+    struct League: Identifiable, Equatable {
 
         let id = UUID()
         let wins: Int
