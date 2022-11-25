@@ -104,9 +104,9 @@ extension MatchesModel {
         /// 게임 시간
         var gameTime: String {
             let formatter = DateComponentsFormatter()
-            formatter.allowedUnits = gameLength >= 3600 ? [.hour, .minute, .second] : [.minute, .second]
+            formatter.allowedUnits = gameLength >= 3600 ? [.hour, .minute, .second] : [.minute, .second] // 시간 포함 여부
             formatter.unitsStyle = .positional
-            formatter.zeroFormattingBehavior = .pad
+            formatter.zeroFormattingBehavior = .pad // 빈 자리 채우기(1:23 -> 01:23)
             return formatter.string(from: TimeInterval(gameLength)) ?? "-"
         }
 
@@ -198,8 +198,8 @@ extension MatchesModel.Game {
         self.badge = game.stats.general.opScoreBadge
         self.spellImageURLs = game.spells.map({ $0.imageURL })
         self.runeImageURLs = game.peak
-        self.itemImageURLs = game.items.dropLast().map({ $0.imageURL })
-        self.wardImageURL = game.items.last?.imageURL
+        self.itemImageURLs = game.items.dropLast().map({ $0.imageURL }) // 마지막은 와드(ward)이므로 제외
+        self.wardImageURL = game.items.last?.imageURL // 마지막 아이템 이미지가 와드(ward)
         self.largestMultiKillString = game.stats.general.largestMultiKillString
     }
 }

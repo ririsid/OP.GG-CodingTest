@@ -12,6 +12,7 @@ struct AppReducer: ReducerProtocol {
     let summonerService: SummonerService = .init()
 
     struct State: Equatable {
+
         var name: String?
         var isLoading: Bool = false
         var apiError: APIError?
@@ -21,6 +22,7 @@ struct AppReducer: ReducerProtocol {
     }
 
     enum Action: Equatable {
+
         case onAppear(name: String)
         case dataLoaded(TaskResult<SummonerAndMatchesModel>)
         case apiErrorAlertDismissed

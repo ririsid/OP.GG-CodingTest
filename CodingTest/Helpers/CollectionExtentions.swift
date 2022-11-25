@@ -7,6 +7,7 @@
 
 import Foundation
 
+// `Collection` 인덱스 접근 안전하게 처리
 extension Collection {
 
     public subscript(index: Index, default defaultValue: @autoclosure () -> Element) -> Element {

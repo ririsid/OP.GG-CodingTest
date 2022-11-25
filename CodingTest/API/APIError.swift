@@ -8,6 +8,7 @@
 #if canImport(Moya)
 import Moya
 
+// MoyaError 래퍼(Wrapper)
 typealias APIError = Moya.MoyaError
 
 extension APIError: Equatable {

@@ -19,14 +19,18 @@ struct MatchesView: View {
         WithViewStore(store) { viewStore in
             if let matches = viewStore.matches {
                 summaryRow(matches)
+
                 ForEach(matches.games) { game in
                     GameRow(game: game)
                         .task {
+                            // 마지막 행이 보일 때 더 읽기
                             if game == matches.games.last, !viewStore.isLoading {
                                 viewStore.send(.lastItemPresented(game.createDate))
                             }
                         }
                 }
+
+                // 더 읽기 중 프로그래스 추가
                 if viewStore.isLoading {
                     ProgressRow()
                 }
@@ -37,21 +41,29 @@ struct MatchesView: View {
     @ViewBuilder private func summaryRow(_ matches: MatchesModel) -> some View {
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("Summary last \(matches.numberOfGames) games")
+                Text("Summary last \(matches.numberOfGames) games") // 로컬라이제이션 적용
+
                 Spacer()
+
                 VStack(alignment: .leading, spacing: 2) {
                     Text(makeWinLoseString(matches.wins, matches.losses))
+
                     kdaText(matches.kills, matches.deaths, matches.assists)
+
                     Text(matches.kdaRatio)
                         .foregroundColor(.greenBlue)
                 }
             }
             .frame(maxWidth: .infinity)
+
             VStack(spacing: 0) {
-                Text("Most Win")
+                Text("Most Win") // 로컬라이제이션 적용
+
                 Spacer()
+
                 HStack(spacing: 0) {
                     Spacer()
+
                     HStack(spacing: 16) {
                         ForEach(matches.champions.prefix(2)) { champion in
                             VStack(spacing: 4) {
@@ -69,13 +81,17 @@ struct MatchesView: View {
                             }
                         }
                     }
+
                     Spacer()
                 }
             }
             .frame(width: 98)
+
             VStack(spacing: 0) {
-                Text("Position")
+                Text("Position") // 로컬라이제이션 적용
+
                 Spacer()
+
                 if let position = matches.position {
                     VStack(spacing: 4) {
                         Image(positionIconName(position.abbreviation))
@@ -90,8 +106,8 @@ struct MatchesView: View {
             }
             .frame(width: 64)
         }
-        .font(.system(size: 10))
-        .foregroundColor(.coolGrey)
+        .font(.system(size: 10)) // 서체 공통 적용
+        .foregroundColor(.coolGrey) // 색상 공통 적용
         .padding(12)
         .frame(height: 90)
     }
@@ -100,13 +116,18 @@ struct MatchesView: View {
         HStack(spacing: 0) {
             Text("\(kills)")
                 .bold()
+
             Text(" / ")
+
             Text("\(deaths)")
                 .bold()
                 .foregroundColor(.darkishPink)
+
             Text(" / ")
+
             Text("\(assists)")
                 .bold()
+
             Spacer()
         }
         .font(.system(size: 14))
@@ -118,7 +139,7 @@ struct MatchesView: View {
     // MARK: Methods
 
     private func makeWinLoseString(_ wins: Int, _ losses: Int) -> LocalizedStringKey {
-        return "\(wins)W \(losses)L"
+        return "\(wins)W \(losses)L" // 로컬라이제이션 적용
     }
 
     private func winningPercentageColor(_ winningPercentage: Double) -> Color {
@@ -126,6 +147,7 @@ struct MatchesView: View {
     }
 
     private func positionIconName(_ position: String) -> String {
+        // 아이콘 이름 합성
         return "iconLol\(position.capitalized)"
     }
 }
