@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 지정 색상
 extension Color {
 
     static var paleGrey: Color {
@@ -58,6 +59,7 @@ extension Color {
     }
 }
 
+// 지정 색상을 `ShapeStyle`로 확장
 extension ShapeStyle where Self == Color {
 
     static var paleGrey: Color { .paleGrey }

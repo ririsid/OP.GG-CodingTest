@@ -27,6 +27,7 @@ struct ContentView: View {
                             IfLetStore(store.scope(state: \.summoner, action: AppReducer.Action.summoner)) {
                                 HeaderView(store: $0)
                             }
+
                             IfLetStore(store.scope(state: \.matches, action: AppReducer.Action.matches)) {
                                 MatchesView(store: $0)
                             }
@@ -36,11 +37,11 @@ struct ContentView: View {
                     ProgressView()
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.paleGrey)
-            .alert(isPresented: viewStore.binding(get: \.showAlert, send: .apiErrorAlertDismissed),
+            .frame(maxWidth: .infinity, maxHeight: .infinity) // 배경색을 화면 가득 채우기
+            .background(.paleGrey) // 배경색
+            .alert(isPresented: viewStore.binding(get: \.showAlert, send: .apiErrorAlertDismissed), // 에러 처리
                    error: viewStore.apiError) { _ in
-                Button("OK") {}
+                Button("OK") {} // 로컬라이제이션 적용
             } message: { error in
                 if let recoverySuggestion = error.recoverySuggestion {
                     Text(recoverySuggestion)

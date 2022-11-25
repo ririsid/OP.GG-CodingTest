@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 
+// summoner API를 제공하는 레이어
 final class SummonerService {
 
     private let apiProvider: APIProvider<SummonerAPI>

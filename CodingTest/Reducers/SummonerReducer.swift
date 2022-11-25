@@ -10,11 +10,13 @@ import ComposableArchitecture
 struct SummonerReducer: ReducerProtocol {
 
     struct State: Equatable {
+
         var summoner: SummonerModel?
         var isUpdating: Bool = false
     }
 
     enum Action: Equatable {
+
         case updateButtonTapped
     }
 

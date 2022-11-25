@@ -8,6 +8,7 @@
 import Foundation
 import os
 
+// 로거 래퍼(Wrapper)
 final class Logger {
 
     static let `default`: os.Logger = os.Logger(subsystem: OSLog.subsystem, category: "Default")
