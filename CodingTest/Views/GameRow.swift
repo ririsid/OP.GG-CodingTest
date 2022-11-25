@@ -16,12 +16,18 @@ struct GameRow: View {
     var body: some View {
         HStack(spacing: 0) {
             resultView
+
             VStack(spacing: 0) {
                 gameInfoView
+
                 Spacer()
+
                 HStack {
                     itemList
+
                     Spacer()
+
+                    // 최다 킬, 없으면 빈 문자열
                     if !game.largestMultiKillString.isEmpty {
                         Text(game.largestMultiKillString)
                             .font(.system(size: 10))
@@ -31,6 +37,7 @@ struct GameRow: View {
                             .background(.white)
                             .cornerRadius(10)
                             .overlay(
+                                // 내부 테두리
                                 RoundedRectangle(cornerRadius: 10)
                                     .strokeBorder(.darkishPink, lineWidth: 1)
                             )
@@ -49,15 +56,19 @@ struct GameRow: View {
     private var resultView: some View {
         VStack(spacing: 6) {
             Spacer()
+
             Text(result(isWin: game.isWin))
                 .font(.system(size: 16, weight: .bold))
                 .foregroundColor(.white)
+
             Divider()
                 .frame(width: 16, height: 1)
                 .overlay(.white.opacity(0.4))
+
             Text(game.gameTime)
                 .font(.textStyle5)
                 .foregroundColor(.white)
+
             Spacer()
         }
         .frame(width: 40)
@@ -76,6 +87,7 @@ struct GameRow: View {
                         ProgressView()
                     }
                     .frame(width: 40, height: 40)
+
                     badgeIcon(game.badge)
                         .offset(y: 30)
                 }
@@ -92,6 +104,7 @@ struct GameRow: View {
                     }
                 }
                 .padding(.leading, 4)
+
                 VStack(spacing: 2) {
                     ForEach(game.runeImageURLs, id: \.self) { imageURL in
                         AsyncImage(url: imageURL) {
@@ -105,21 +118,27 @@ struct GameRow: View {
                     }
                 }
                 .padding(.leading, 2)
+
                 VStack(alignment: .leading, spacing: 2) {
                     kdaText(game.kills, game.deaths, game.assists)
+
                     killParticipationText(game.killParticipation)
                 }
                 .padding(.leading, 8)
             }
+
             Spacer(minLength: 14)
+
             VStack(alignment: .trailing, spacing: 1) {
                 Text(game.gameType)
                     .truncationMode(.tail)
                     .font(.textStyle)
                     .foregroundColor(.coolGrey)
+
                 Text(game.timeAgo)
                     .font(.textStyle)
                     .foregroundColor(.coolGrey)
+
                 Spacer()
             }
         }
@@ -127,6 +146,7 @@ struct GameRow: View {
 
     private var itemList: some View {
         HStack(alignment: .bottom, spacing: 2) {
+            // 최대 6개의 아이템 표시
             ForEach(0..<6) { index in
                 ZStack {
                     RoundedRectangle(cornerRadius: 4)
@@ -144,6 +164,8 @@ struct GameRow: View {
                 }
                 .frame(width: 24, height: 24)
             }
+
+            // 와드
             ZStack {
                 Circle()
                     .fill(.paleGreyTwo)
@@ -174,6 +196,7 @@ struct GameRow: View {
                 .background(badgeBackgroundColor(badge))
                 .cornerRadius(8)
                 .overlay(
+                    // 내부 테두리
                     RoundedRectangle(cornerRadius: 8)
                         .strokeBorder(.white, lineWidth: 1)
                 )
@@ -184,13 +207,18 @@ struct GameRow: View {
         HStack(spacing: 0) {
             Text("\(kills)")
                 .bold()
+
             Text(" / ")
+
             Text("\(deaths)")
                 .bold()
                 .foregroundColor(.darkishPink)
+
             Text(" / ")
+
             Text("\(assists)")
                 .bold()
+
             Spacer()
         }
         .font(.system(size: 16))
@@ -200,7 +228,7 @@ struct GameRow: View {
     }
 
     @ViewBuilder private func killParticipationText(_ killParticipation: String) -> some View {
-        Text("K/P \(killParticipation)")
+        Text("K/P \(killParticipation)") // 로컬라이제이션 적용
             .font(.textStyle)
             .foregroundColor(.gunmetal)
     }
@@ -208,7 +236,7 @@ struct GameRow: View {
     // MARK: Methods
 
     private func result(isWin: Bool) -> LocalizedStringKey {
-        return isWin ? "W" : "L"
+        return isWin ? "W" : "L" // 로컬라이제이션 적용
     }
 
     private func resultBackgroundColor(isWin: Bool) -> Color {

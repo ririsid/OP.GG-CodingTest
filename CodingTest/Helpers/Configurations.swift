@@ -7,6 +7,7 @@
 
 import Foundation
 
+// 설정 쉽게 가져오기
 // [Reference](https://nshipster.com/xcconfig/)
 private enum Configuration {
 
@@ -35,6 +36,7 @@ enum Configurations {}
 
 extension Configurations {
 
+    // 개발 환경 분리시 도움이 됨
     enum API {
         static var baseURL: URL { try! URL(string: Configuration.value(for: "API_BASE_URL"))! }
     }

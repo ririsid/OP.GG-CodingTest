@@ -7,6 +7,7 @@
 
 import Foundation
 
+// 산술 계산 도우미
 final class Calculator {
 
     private init() {}

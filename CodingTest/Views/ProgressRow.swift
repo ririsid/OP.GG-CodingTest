@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 더 읽기할 때 사용
 struct ProgressRow: View {
 
     var body: some View {

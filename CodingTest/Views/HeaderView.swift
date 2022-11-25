@@ -17,13 +17,14 @@ struct HeaderView: View {
 
     var body: some View {
         WithViewStore(store) { viewStore in
-            VStack(alignment: .leading, spacing: 0) {
-                if let summoner = viewStore.summoner {
+            if let summoner = viewStore.summoner {
+                VStack(alignment: .leading, spacing: 0) {
                     profile(summoner)
+
                     leagues(summoner)
                 }
+                .padding(.vertical, 8)
             }
-            .padding(.vertical, 8)
         }
     }
 
@@ -39,6 +40,7 @@ struct HeaderView: View {
                         ProgressView()
                     }
                     .frame(width: 88, height: 88)
+
                     Text("\(summoner.level)")
                         .font(.textStyle5)
                         .foregroundColor(.white)
@@ -47,31 +49,37 @@ struct HeaderView: View {
                         .background(.darkGrey90)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
+
                 VStack(alignment: .leading) {
                     Text(summoner.name)
                         .font(.textStyle2)
                         .tracking(-0.7)
                         .foregroundColor(.darkGrey)
+
                     Spacer()
+
                     Button(action: {
                         viewStore.send(.updateButtonTapped)
                     }) {
                         ZStack {
-                            Text("Update")
+                            Text("Update") // 로컬라이제이션 적용
                                 .font(.system(size: 14))
-                                .foregroundColor(viewStore.isUpdating ? .clear : .white)
+                                .foregroundColor(viewStore.isUpdating ? .clear : .white) // 로딩 중 글자 숨김(프로그래스 추가)
                                 .padding(.horizontal, 20)
                                 .frame(height: 40)
-                                .background(.softBlue.opacity(viewStore.isUpdating ? 0.3 : 1))
+                                .background(.softBlue.opacity(viewStore.isUpdating ? 0.3 : 1)) // 로딩 중 비활성화
                                 .clipShape(RoundedRectangle(cornerRadius: 20))
+
+                            // 로딩 중 프로그래스 추가
                             if viewStore.isUpdating {
                                 ProgressView()
                             }
                         }
                     }
-                    .disabled(viewStore.isUpdating)
+                    .disabled(viewStore.isUpdating) // 로딩 중 비활성화
                 }
                 .frame(height: 88)
+
                 Spacer()
             }
             .padding(16)
@@ -84,6 +92,7 @@ struct HeaderView: View {
                 HStack(spacing: 8) {
                     Spacer()
                         .frame(width: 8)
+
                     ForEach(summoner.leagues) { league in
                         HStack(spacing: 8) {
                             AsyncImage(url: league.tierImageURL) {
@@ -93,25 +102,34 @@ struct HeaderView: View {
                                 ProgressView()
                             }
                             .frame(width: 64, height: 64)
+
                             VStack(alignment: .leading, spacing: 0) {
                                 Text(league.tierName)
                                     .font(.textStyle)
                                     .foregroundColor(.softBlue)
+
                                 Spacer(minLength: 0)
+
                                 Text(league.tier)
                                     .font(.textStyle3)
                                     .foregroundColor(.darkGrey)
+
                                 Spacer(minLength: 1)
+
                                 Text(makeLPString(league.lp))
                                     .font(.system(size: 12))
                                     .foregroundColor(.darkGrey)
+
                                 Spacer(minLength: 1)
+
                                 Text(makeWinLoseString(league.wins, league.losses, winningPercentage: league.winningPercentageString))
                                     .font(.textStyle4)
                                     .foregroundColor(.steelGrey)
                             }
                             .frame(height: 64)
+
                             Spacer(minLength: 0)
+
                             Image("iconArrowRight")
                                 .background(Circle()
                                     .fill(.paleGrey)
@@ -126,6 +144,7 @@ struct HeaderView: View {
                         .cornerRadius(4)
                         .shadow(color: .steelGrey.opacity(0.2), radius: 3, y: 4)
                     }
+
                     Spacer()
                         .frame(width: 8)
                 }
@@ -145,7 +164,7 @@ struct HeaderView: View {
     }
 
     private func makeWinLoseString(_ wins: Int, _ losses: Int, winningPercentage: String) -> LocalizedStringKey {
-        return "\(wins)W \(losses)L (\(winningPercentage))"
+        return "\(wins)W \(losses)L (\(winningPercentage))" // 로컬라이제이션 적용
     }
 }
 
