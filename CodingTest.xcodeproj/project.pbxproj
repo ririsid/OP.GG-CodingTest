@@ -25,7 +25,7 @@
 		7118A9FB29260387004D92DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7118A9FD29260387004D92DD /* Localizable.strings */; };
 		7118AA01292605C4004D92DD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7118AA00292605C4004D92DD /* Logger.swift */; };
 		7118AA03292614A0004D92DD /* SummonerMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7118AA02292614A0004D92DD /* SummonerMatches.swift */; };
-		7118AA0729261ED1004D92DD /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7118AA0629261ED1004D92DD /* HeaderView.swift */; };
+		7118AA0729261ED1004D92DD /* SummonerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7118AA0629261ED1004D92DD /* SummonerView.swift */; };
 		7118AA0A29261F5D004D92DD /* SummonerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7118AA0929261F5D004D92DD /* SummonerModel.swift */; };
 		7118AA0C29262BAB004D92DD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7118AA0B29262BAB004D92DD /* Color.swift */; };
 		7118AA0E29262E9B004D92DD /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7118AA0D29262E9B004D92DD /* Font.swift */; };
@@ -40,6 +40,10 @@
 		719798FB292B6CAF0032EDD4 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719798FA292B6CAF0032EDD4 /* AppReducer.swift */; };
 		71979901292C9B3C0032EDD4 /* SummonerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71979900292C9B3C0032EDD4 /* SummonerReducer.swift */; };
 		71979903292CA71B0032EDD4 /* MatchesReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71979902292CA71B0032EDD4 /* MatchesReducer.swift */; };
+		71DD80682931EFB400226B3B /* LeaguesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DD80672931EFB400226B3B /* LeaguesView.swift */; };
+		71DD806A2931EFBF00226B3B /* LeagueRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DD80692931EFBF00226B3B /* LeagueRow.swift */; };
+		71DD806D2931FE1100226B3B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DD806C2931FE1100226B3B /* ProfileView.swift */; };
+		71DD806F2932068400226B3B /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DD806E2932068400226B3B /* AvatarView.swift */; };
 		71FAB343292CABF600F837F9 /* SummonerAndMatchesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FAB342292CABF600F837F9 /* SummonerAndMatchesModel.swift */; };
 		71FAB345292F51DD00F837F9 /* ProgressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FAB344292F51DD00F837F9 /* ProgressRow.swift */; };
 /* End PBXBuildFile section */
@@ -84,7 +88,7 @@
 		7118A9FF292603ED004D92DD /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7118AA00292605C4004D92DD /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		7118AA02292614A0004D92DD /* SummonerMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerMatches.swift; sourceTree = "<group>"; };
-		7118AA0629261ED1004D92DD /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		7118AA0629261ED1004D92DD /* SummonerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerView.swift; sourceTree = "<group>"; };
 		7118AA0929261F5D004D92DD /* SummonerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerModel.swift; sourceTree = "<group>"; };
 		7118AA0B29262BAB004D92DD /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7118AA0D29262E9B004D92DD /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
@@ -98,6 +102,10 @@
 		719798FA292B6CAF0032EDD4 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		71979900292C9B3C0032EDD4 /* SummonerReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerReducer.swift; sourceTree = "<group>"; };
 		71979902292CA71B0032EDD4 /* MatchesReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesReducer.swift; sourceTree = "<group>"; };
+		71DD80672931EFB400226B3B /* LeaguesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesView.swift; sourceTree = "<group>"; };
+		71DD80692931EFBF00226B3B /* LeagueRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueRow.swift; sourceTree = "<group>"; };
+		71DD806C2931FE1100226B3B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		71DD806E2932068400226B3B /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		71FAB342292CABF600F837F9 /* SummonerAndMatchesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerAndMatchesModel.swift; sourceTree = "<group>"; };
 		71FAB344292F51DD00F837F9 /* ProgressRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -257,9 +265,8 @@
 		7118AA0529261EB4004D92DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7118AA0629261ED1004D92DD /* HeaderView.swift */,
-				7118AA132927BF84004D92DD /* MatchesView.swift */,
-				715954632927E6E7003253E6 /* GameRow.swift */,
+				71DD80652931EF7700226B3B /* Summoner */,
+				71DD80662931EF9000226B3B /* Matches */,
 				71FAB344292F51DD00F837F9 /* ProgressRow.swift */,
 			);
 			path = Views;
@@ -283,6 +290,43 @@
 				71979902292CA71B0032EDD4 /* MatchesReducer.swift */,
 			);
 			path = Reducers;
+			sourceTree = "<group>";
+		};
+		71DD80652931EF7700226B3B /* Summoner */ = {
+			isa = PBXGroup;
+			children = (
+				7118AA0629261ED1004D92DD /* SummonerView.swift */,
+				71DD80702932073D00226B3B /* Profile */,
+				71DD806B2931F7F800226B3B /* Leagues */,
+			);
+			path = Summoner;
+			sourceTree = "<group>";
+		};
+		71DD80662931EF9000226B3B /* Matches */ = {
+			isa = PBXGroup;
+			children = (
+				7118AA132927BF84004D92DD /* MatchesView.swift */,
+				715954632927E6E7003253E6 /* GameRow.swift */,
+			);
+			path = Matches;
+			sourceTree = "<group>";
+		};
+		71DD806B2931F7F800226B3B /* Leagues */ = {
+			isa = PBXGroup;
+			children = (
+				71DD80672931EFB400226B3B /* LeaguesView.swift */,
+				71DD80692931EFBF00226B3B /* LeagueRow.swift */,
+			);
+			path = Leagues;
+			sourceTree = "<group>";
+		};
+		71DD80702932073D00226B3B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				71DD806C2931FE1100226B3B /* ProfileView.swift */,
+				71DD806E2932068400226B3B /* AvatarView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,24 +473,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				71FAB343292CABF600F837F9 /* SummonerAndMatchesModel.swift in Sources */,
+				71DD806D2931FE1100226B3B /* ProfileView.swift in Sources */,
 				715954662927E905003253E6 /* CollectionExtentions.swift in Sources */,
 				7118A9F72924F48B004D92DD /* APIError.swift in Sources */,
+				71DD806A2931EFBF00226B3B /* LeagueRow.swift in Sources */,
 				7118A9F52924EB92004D92DD /* SummonerData.swift in Sources */,
 				715954642927E6E7003253E6 /* GameRow.swift in Sources */,
 				7118AA0E29262E9B004D92DD /* Font.swift in Sources */,
 				7118A9B42924C0CF004D92DD /* ContentView.swift in Sources */,
 				7118A9EF2924DE19004D92DD /* SummonerService.swift in Sources */,
 				719798FB292B6CAF0032EDD4 /* AppReducer.swift in Sources */,
+				71DD80682931EFB400226B3B /* LeaguesView.swift in Sources */,
 				71979901292C9B3C0032EDD4 /* SummonerReducer.swift in Sources */,
 				71979903292CA71B0032EDD4 /* MatchesReducer.swift in Sources */,
 				7118AA0C29262BAB004D92DD /* Color.swift in Sources */,
 				7118AA1029277AFF004D92DD /* MatchesModel.swift in Sources */,
 				7118AA1229277D4B004D92DD /* Calculataor.swift in Sources */,
 				7118AA01292605C4004D92DD /* Logger.swift in Sources */,
+				71DD806F2932068400226B3B /* AvatarView.swift in Sources */,
 				7118A9E72924CC8D004D92DD /* SummonerAPI.swift in Sources */,
 				7118A9ED2924D8BB004D92DD /* APIProvider.swift in Sources */,
 				71FAB345292F51DD00F837F9 /* ProgressRow.swift in Sources */,
-				7118AA0729261ED1004D92DD /* HeaderView.swift in Sources */,
+				7118AA0729261ED1004D92DD /* SummonerView.swift in Sources */,
 				7118A9EA2924CE23004D92DD /* Configurations.swift in Sources */,
 				7118AA142927BF84004D92DD /* MatchesView.swift in Sources */,
 				7118AA0A29261F5D004D92DD /* SummonerModel.swift in Sources */,
