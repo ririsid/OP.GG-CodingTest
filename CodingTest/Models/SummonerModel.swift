@@ -12,7 +12,7 @@ struct SummonerModel: Equatable {
     let name: String
     let level: Int
     let profileImageURL: URL
-    let leagues: [League]
+    let leagues: [SummonerModel.League]
 }
 
 extension SummonerModel {

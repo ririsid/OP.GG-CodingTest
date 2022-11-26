@@ -25,7 +25,7 @@ struct ContentView: View {
                     ScrollView {
                         LazyVStack(spacing: 0) {
                             IfLetStore(store.scope(state: \.summoner, action: AppReducer.Action.summoner)) {
-                                HeaderView(store: $0)
+                                SummonerView(store: $0)
                             }
 
                             IfLetStore(store.scope(state: \.matches, action: AppReducer.Action.matches)) {
