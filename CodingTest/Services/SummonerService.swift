@@ -20,7 +20,7 @@ final class SummonerService {
     }
 
     /// 소환사 정보 가져오기
-    func fetchSummoner(_ name: String, callbackQueue: DispatchQueue? = .none) -> AnyPublisher<Summoner, APIError> {
+    func fetchSummoner(_ name: String) -> AnyPublisher<Summoner, APIError> {
         return apiProvider.request(.summoner(name: name))
             .compactMap { try? JSONDecoder().decode(SummonerData.self, from: $0.data).summoner }
             .eraseToAnyPublisher()
@@ -41,7 +41,7 @@ final class SummonerService {
     }
 
     /// 게임 정보 가져오기
-    func fetchSummonerMatches(_ name: String, lastMatch: UInt? = nil, callbackQueue: DispatchQueue? = .none) -> AnyPublisher<SummonerMatches, APIError> {
+    func fetchSummonerMatches(_ name: String, lastMatch: UInt? = nil) -> AnyPublisher<SummonerMatches, APIError> {
         return apiProvider.request(.summonerMatches(name: name, lastMatch: lastMatch))
             .compactMap { try? JSONDecoder().decode(SummonerMatches.self, from: $0.data) }
             .eraseToAnyPublisher()
@@ -62,9 +62,9 @@ final class SummonerService {
     }
 
     /// 소환사 및 게임 정보 가져오기
-    func fetchSummonerAndMatches(_ name: String, callbackQueue: DispatchQueue? = .none) -> AnyPublisher<(Summoner, SummonerMatches), APIError> {
-        return fetchSummoner(name, callbackQueue: callbackQueue)
-            .combineLatest(fetchSummonerMatches(name, callbackQueue: callbackQueue))
+    func fetchSummonerAndMatches(_ name: String) -> AnyPublisher<(Summoner, SummonerMatches), APIError> {
+        return fetchSummoner(name)
+            .combineLatest(fetchSummonerMatches(name))
             .eraseToAnyPublisher()
     }
 

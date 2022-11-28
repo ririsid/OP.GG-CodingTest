@@ -20,7 +20,7 @@ final class APIProvider<Target> where Target: Moya.TargetType {
         self.provider = MoyaProvider<Target>(plugins: [NetworkLoggerPlugin()]) // 네트워크 로거 추가
     }
 
-    func request(_ target: Target, callbackQueue: DispatchQueue? = .none) -> AnyPublisher<Moya.Response, APIError> {
+    func request(_ target: Target, callbackQueue: DispatchQueue? = nil) -> AnyPublisher<Moya.Response, APIError> {
         return provider.requestPublisher(target, callbackQueue: callbackQueue)
     }
 }
